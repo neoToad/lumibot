@@ -763,6 +763,8 @@ class Order:
                 pass
                 # raise ValueError("Order class is OCO but child orders are not set and no limit/stop prices have "
                 #                  "been provided.")
+                # print("Order class is OCO but child orders are not set and no limit/stop prices have "
+                #                  "been provided.")
 
         elif self.order_class == self.OrderClass.BRACKET:
             # This is a "Bracket" advanced order which typically consists of a primary (entry) order and
