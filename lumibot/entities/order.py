@@ -760,8 +760,9 @@ class Order:
                     if not isinstance(child_order, Order):
                         raise ValueError("Child orders must be of type Order")
             else:
-                raise ValueError("Order class is OCO but child orders are not set and no limit/stop prices have "
-                                 "been provided.")
+                pass
+                # raise ValueError("Order class is OCO but child orders are not set and no limit/stop prices have "
+                #                  "been provided.")
 
         elif self.order_class == self.OrderClass.BRACKET:
             # This is a "Bracket" advanced order which typically consists of a primary (entry) order and
