@@ -767,7 +767,7 @@ class StrategyExecutor(Thread):
 
         # Create a message to send to Discord
         message = f"""
-                {emoji} {side} {quantity:,.2f} {position.asset} @ ${price:,.2f} 
+                {emoji} {side} {position.asset} @ ${price:,.2f} 
                 
                 """
 
