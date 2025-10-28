@@ -757,12 +757,6 @@ class StrategyExecutor(Thread):
     def _on_filled_order(self, position, order, price, quantity, multiplier):
         self.strategy.on_filled_order(position, order, price, quantity, multiplier)
 
-        # Get the portfolio value
-
-
-
-
-        # Capitalize the side
         side = order.side.capitalize()
 
         # Check if we are buying or selling
