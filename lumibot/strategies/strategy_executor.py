@@ -758,17 +758,9 @@ class StrategyExecutor(Thread):
         self.strategy.on_filled_order(position, order, price, quantity, multiplier)
 
         # Get the portfolio value
-        portfolio_value = self.strategy.portfolio_value
 
-        # Calculate the value of the position
-        order_value = price * float(quantity)
 
-        # If option, multiply % of portfolio by multiplier
-        if order.asset.asset_type == Asset.AssetType.OPTION:
-            order_value = order_value * multiplier
 
-        # Calculate the percent of the portfolio that this position represents
-        percent_of_portfolio = order_value / portfolio_value
 
         # Capitalize the side
         side = order.side.capitalize()
@@ -781,14 +773,13 @@ class StrategyExecutor(Thread):
 
         # Create a message to send to Discord
         message = f"""
-                {emoji} {side} {quantity:,.2f} {position.asset} @ ${price:,.2f} ({percent_of_portfolio:,.0%} of the account)
-                Trade Total = ${order_value:,.2f}
-                Account Value = ${portfolio_value:,.0f}
+                {emoji} {side} {quantity:,.2f} {position.asset} @ ${price:,.2f} 
+                
                 """
 
         # Check if we should hide trades
         if self.strategy.hide_trades:
-            message = f"Trade executed but hidden due to hide_trades setting. Account Value = ${portfolio_value:,.0f}"
+            message = f"Trade executed but hidden due to hide_trades setting."
             self.strategy.send_discord_message(message, silent=False)
         else:
             # Send the message to Discord
