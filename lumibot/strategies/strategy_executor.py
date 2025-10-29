@@ -745,8 +745,23 @@ class StrategyExecutor(Thread):
     def _on_new_order(self, order):
         self.strategy.on_new_order(order)
 
+        message = \
+            f"""
+            Order placed: {order.side} {order.asset} 
+
+            """
+
+        self.strategy.send_discord_message(message, silent=False)
+
     @event_method
     def _on_canceled_order(self, order):
+        message = \
+            f"""
+                Order cancelled: {order.side} {order.asset} 
+
+                """
+
+        self.strategy.send_discord_message(message, silent=False)
         self.strategy.on_canceled_order(order)
 
     @event_method
@@ -767,7 +782,7 @@ class StrategyExecutor(Thread):
 
         # Create a message to send to Discord
         message = f"""
-                {emoji} {side} {position.asset} @ ${price:,.2f} 
+                {emoji} {side} {position.asset} @ ${price:,.2f} -- Filled
                 
                 """
 
